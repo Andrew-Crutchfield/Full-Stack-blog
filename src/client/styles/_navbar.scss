@@ -1,0 +1,18 @@
+// Assuming you have defined $dark-gray and $light-gray variables in your SCSS setup
+$dark-gray: #333; // Example color
+$light-gray: #f8f9fa; // Example color
+
+.navbar {
+    background-color: $dark-gray;
+    padding: 1rem;
+  
+    .navbar-brand {
+      color: $light-gray;
+  
+      &:hover {
+        color: lighten($light-gray, 10%);
+      }
+    }
+  
+    // Other navbar styles...
+}

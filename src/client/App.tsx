@@ -1,22 +1,32 @@
-import React, { useState, useEffect } from 'react';
-
-interface AppProps {}
-
-const App = (props: AppProps) => {
-	const [data, setData] = useState('');
-
-	useEffect(() => {
-		fetch('http://localhost:3000/api/hello')
-			.then(res => res.json())
-			.then(data => setData(data.message))
-			.catch(e => console.log('[fetch erorr]', e));
-	}, []);
-
-	return (
-		<div className="mx-auto mt-5 w-25">
-			<div className="alert alert-info text-center">Hello {data}</div>
-		</div>
-	);
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import HomePage from './components/HomePage';
+import PostList from './components/PostList';
+import PostDetailPage from './components/PostDetailPage';
+import ComposePage from './components/ComposePage';
+import AdminPanel from './components/AdminPanel';
+import NotFoundPage from './components/404Page';
+import AuthorPage from './components/AuthorPage';
+import Email from './components/Email'; 
+const App: React.FC = () => {
+    return (
+        <Router>
+            <Navbar />
+            <div className="container mt-5">
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/posts" element={<PostList />} />
+                    <Route path="/posts/:id" element={<PostDetailPage />} />
+                    <Route path="/compose" element={<ComposePage />} />
+                    <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/authors/:authorId" element={<AuthorPage />} />
+                    <Route path="/contact-us" element={<Email />} /> 
+                    <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 };
 
 export default App;
